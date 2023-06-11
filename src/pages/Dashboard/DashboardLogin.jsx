@@ -74,7 +74,10 @@ export const DashboardLogin = () => {
             <Input
               className="mt-1 mb-3"
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, email: e.target.value }))
+                setFormData((prev) => ({
+                  ...prev,
+                  email: e.target.value,
+                }))
               }
             />
           </Label>
@@ -85,7 +88,10 @@ export const DashboardLogin = () => {
               type="password"
               className="mt-1 mb-3"
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, password: e.target.value }))
+                setFormData((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
               }
             />
           </Label>
