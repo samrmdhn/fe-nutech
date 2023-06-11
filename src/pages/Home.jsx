@@ -11,8 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/Card";
+
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Skeleton } from "../components/Skeleton";
 
 export const Home = () => {
   const { credentials } = useJWT();
@@ -75,40 +77,82 @@ export const Home = () => {
       </div>
       <div className="p-5">
         <div className="flex flex-wrap -mx-2">
-          {products.map((product) => {
-            return (
-              <div
-                key={product._id}
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-2 mb-4"
-              >
-                <Card className="h-full">
-                  <CardHeader>
-                    <CardTitle className="font-bold">{product.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="mb-3">
-                      <img
-                        src={product.img}
-                        style={{
-                          objectFit: "contain",
-                          height: "200px",
-                          width: "100%",
-                        }}
-                      />
-                    </div>
+          {products.length !== 0 ? (
+            products.map((product) => {
+              return (
+                <div
+                  key={product._id}
+                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-2 mb-4"
+                >
+                  <Card className="h-full">
+                    <CardHeader>
+                      <CardTitle className="font-bold">
+                        {product.name}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="mb-3">
+                        <img
+                          src={product.img}
+                          style={{
+                            objectFit: "contain",
+                            height: "200px",
+                            width: "100%",
+                          }}
+                        />
+                      </div>
 
-                    <div>Description: {product.description}</div>
+                      <div>Description: {product.description}</div>
 
-                    <div>Price: {product.price_sell}</div>
-                    <div>Stock: {product.stock}</div>
-                    <div>Category: {product.categoryId?.name}</div>
+                      <div>Price: {product.price_sell}</div>
+                      <div>Stock: {product.stock}</div>
+                      <div>Category: {product.categoryId?.name}</div>
 
-                    {/* EDIT PRODUCT */}
-                  </CardContent>
-                </Card>
-              </div>
-            );
-          })}
+                      {/* EDIT PRODUCT */}
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })
+          ) : (
+            <>
+              {Array.from({ length: 8 }, (_, index) => (
+                <div
+                  key={index}
+                  className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-2 mb-4"
+                >
+                  <Card className="h-full">
+                    <CardHeader className="h-[65px]">
+                      <CardTitle className="font-bold">
+                        <Skeleton className="w-full h-[30px]" />
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div>
+                        <Skeleton className="h-[250px] mb-3" />
+                      </div>
+
+                      <div>
+                        <Skeleton className="h-[30px] mb-3" />
+                      </div>
+
+                      <div>
+                        <Skeleton className="h-[30px]" />
+                      </div>
+                      <div>
+                        <Skeleton />
+                      </div>
+                      <div>
+                        <Skeleton />
+                      </div>
+
+                      {/* EDIT PRODUCT */}
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </>
+          )}
         </div>
 
         <div className="flex justify-center gap-5">

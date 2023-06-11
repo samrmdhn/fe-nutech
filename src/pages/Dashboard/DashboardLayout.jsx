@@ -20,7 +20,7 @@ export const DashboardLayout = () => {
       navigate("/dashboard/login");
     }
 
-    if (credentials.role !== "admin") {
+    if (credentials?.role !== "admin") {
       navigate("/dashboard/login");
     }
 
